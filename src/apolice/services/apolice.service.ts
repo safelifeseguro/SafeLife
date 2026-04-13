@@ -38,14 +38,6 @@ export class ApoliceService {
         return await this.apoliceRepository.delete(id_apolice);
     }
 
-
-
-//TESTE
-//TESTE2
-//teste3
-
-
-
 }
 
 

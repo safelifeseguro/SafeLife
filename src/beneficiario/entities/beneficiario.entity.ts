@@ -1,12 +1,14 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 import { PrimaryGeneratedColumn } from "typeorm";
+import { Apolice } from "../../apolice/entities/apolice.entity";
+import { JoinColumn } from "typeorm";
 
 @Entity({ name: "tb_beneficiario"})
 export class Beneficiario {
     
     @PrimaryGeneratedColumn() // Cria a chave primaria automaticamente
-    id_apolice!: number;
+    id_beneficiario!: number;
 
     @IsNotEmpty()
     @Column({ length: 255, nullable: false }) // Cria uma coluna chamada nome, com 255 caracteres e não pode ser nula
@@ -21,7 +23,12 @@ export class Beneficiario {
     parentesco!: string;
 
     @IsNotEmpty()
-    @Column({ length: 255, nullable: false }) // Cria uma coluna chamada percentual, com 255 caracteres e não pode ser nula
+    @Column({ type: 'decimal', precision: 5, scale: 2, nullable: false })
     percentual!: number;
 
+    @ManyToOne(() => Apolice, (apolice) => apolice.beneficiario, {
+        onDelete: "CASCADE"
+    })
+    @JoinColumn({ name: 'id_apolice' })
+    apolice!: Apolice;
 }

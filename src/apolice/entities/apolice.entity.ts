@@ -1,5 +1,7 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Cliente } from "../../cliente/entities/Cliente.entity";
+import { Beneficiario } from "../../beneficiario/entities/beneficiario.entity";
 
 @Entity({ name: "tb_apolice" })
 export class Apolice {
@@ -26,9 +28,16 @@ export class Apolice {
     @Column({length:255, nullable:false})
     cobertura!: string;
 
-    //inserir cpf cliente
-    }
+    @ManyToOne(() => Cliente, (cliente) => cliente.apolice, {
+        onDelete: "CASCADE"
+    })
+    @JoinColumn({ name:  'cpf' })
+    cliente!: Cliente;
 
 
+    @OneToMany(() => Beneficiario, (beneficiario) => beneficiario.apolice, {
+        onDelete: "CASCADE"
+    })
+    beneficiario!: Beneficiario[];
 
-    
+}    

@@ -7,7 +7,7 @@ export class ClienteController {
 
   constructor(private readonly service: ClienteService) {}
 
-  @Post()
+  @Post('/cadastrar')
   async create(@Body() dados: Cliente) {
     return await this.service.create(dados);
   }
@@ -17,19 +17,19 @@ export class ClienteController {
     return await this.service.findAll();
   }
 
-  @Get(':cpf')
+  @Get('/:cpf')
   async getByCpf(@Param('cpf') cpf: string) {
     return await this.service.findByCpf(cpf);
   }
 
-  @Put(':cpf')
+  @Put('/:cpf')
   async update(@Param('cpf') cpf: string, @Body() dados: Partial<Cliente>) {
     return await this.service.update(cpf, dados);
   }
 
-  @Delete(':cpf')
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete('/:cpf')
   async delete(@Param('cpf') cpf: string) {
-    await this.service.delete(cpf);
+    const mensagem = await this.service.delete(cpf);
+    return { message: mensagem };
   }
 }

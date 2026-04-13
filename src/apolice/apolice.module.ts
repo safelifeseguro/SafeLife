@@ -7,8 +7,8 @@ import { ApoliceService } from "./services/apolice.service";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Apolice])],  
-  providers: [ApoliceService],
   controllers: [ApoliceController],
-  exports: [TypeOrmModule],
+  providers: [ApoliceService],
+  exports: [ApoliceService],
 })
 export class ApoliceModule {}

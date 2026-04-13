@@ -9,14 +9,13 @@ export class ClienteService {
     @InjectRepository(Cliente)
     private repository: Repository<Cliente>,
   ) {}
-
   async create(dados: Cliente): Promise<Cliente> {
     const hoje = new Date();
     const nascimento = new Date(dados.data_nascimento);
     let idade = hoje.getFullYear() - nascimento.getFullYear();
 
     if (idade < 18) {
-      throw new HttpException('Não elegível para este tipo de seguro.', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Idade não elegivel para esse tipo de seguro.', HttpStatus.BAD_REQUEST);
     }
     return await this.repository.save(dados);
   }
@@ -37,8 +36,11 @@ export class ClienteService {
     return await this.repository.save(cliente);
   }
 
-  async delete(cpf: string): Promise<void> {
+  async delete(cpf: string): Promise<string> {
     let cliente = await this.findByCpf(cpf);
     await this.repository.remove(cliente);
+    return "Cliente deletado com sucesso";
   }
+
+  
 }
