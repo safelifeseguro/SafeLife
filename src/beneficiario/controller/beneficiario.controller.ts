@@ -1,10 +1,6 @@
-import { HttpCode, HttpStatus, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { HttpCode, HttpStatus, Param, ParseIntPipe, Post, Get, Body, Put, Delete } from "@nestjs/common";
 import { BeneficiarioService } from "../service/beneficiario.service";
 import { Beneficiario } from "../entities/beneficiario.entity";
-import { Get } from "@nestjs/common";
-import { Body } from "@nestjs/common";
-import { Put } from "@nestjs/common";
-import { Delete } from "@nestjs/common";
 import { Controller } from "@nestjs/common";
 
 @Controller("/beneficiarios")

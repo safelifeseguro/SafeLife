@@ -12,18 +12,27 @@ export class ApoliceService {
   ) {} 
 
     async findAll(): Promise<Apolice[]> {
-        return await this.apoliceRepository.find();
-        
+  return await this.apoliceRepository.find({
+    relations: {
+      beneficiario: true
     }
+  });
+}
 
     async findById(id_apolice: number): Promise<Apolice> {
-      const apolice = await this.apoliceRepository.findOne({ 
-        where: { id_apolice } });
-        if (!apolice) {
-            throw new HttpException('Apolice não encontrada', HttpStatus.NOT_FOUND);
-        }
-        return apolice;
+  const apolice = await this.apoliceRepository.findOne({ 
+    where: { id_apolice },
+    relations: {
+      beneficiario: true
     }
+  });
+
+  if (!apolice) {
+    throw new HttpException('Apolice não encontrada', HttpStatus.NOT_FOUND);
+  }
+
+  return apolice;
+}
 
     async create(apolice: Apolice): Promise<Apolice> {
         return await this.apoliceRepository.save(apolice);
