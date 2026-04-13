@@ -33,9 +33,10 @@ export class ApoliceService {
         return await this.apoliceRepository.save(apolice);
     }
 
-    async delete(id_apolice: number): Promise<DeleteResult> {
-        await this.findById(id_apolice);
-        return await this.apoliceRepository.delete(id_apolice);
+    async delete(id_apolice: number): Promise<string> {
+    await this.findById(id_apolice);
+    await this.apoliceRepository.delete(id_apolice);
+    return "Apolice deletada com sucesso";
     }
 
 }

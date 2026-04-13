@@ -24,18 +24,15 @@ create(@Body() apolice: Apolice): Promise<Apolice> {
     return this.apoliceService.create(apolice);
     }
 
-@Put()
+@Put("/:id_apolice")
 @HttpCode(HttpStatus.OK)
 update(@Body() apolice: Apolice): Promise<Apolice> {
     return this.apoliceService.update(apolice);
     }
 
-    @Delete("/:id_apolice")
-    @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id_apolice', ParseIntPipe) id_apolice: number){
-        return this.apoliceService.delete(id_apolice);
+@Delete("/:id_apolice")
+ async delete(@Param('id_apolice') id_apolice: number){
+        const mensagem = await this.apoliceService.delete(id_apolice);
+        return { message: mensagem };
     }
-
-
-
 }

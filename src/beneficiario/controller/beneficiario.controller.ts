@@ -1,7 +1,10 @@
-import { HttpCode, HttpStatus, Param, ParseIntPipe } from "@nestjs/common";
+import { HttpCode, HttpStatus, Param, ParseIntPipe, Post } from "@nestjs/common";
 import { BeneficiarioService } from "../service/beneficiario.service";
 import { Beneficiario } from "../entities/beneficiario.entity";
-import { Get, Post, Put, Delete, Body } from "@nestjs/common"; // Métodos HTTP
+import { Get } from "@nestjs/common";
+import { Body } from "@nestjs/common";
+import { Put } from "@nestjs/common";
+import { Delete } from "@nestjs/common";
 import { Controller } from "@nestjs/common";
 
 @Controller("/beneficiarios")
@@ -38,10 +41,8 @@ export class BeneficiarioController{
         return this.beneficiarioService.update(beneficiario);
     }
 
-    @Delete('/:id_apolice') // Deleta um beneficiário por id_apolice
+    @Delete('/:id_apolice')
     @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id_apolice', ParseIntPipe) id_apolice: number) {
-        return this.beneficiarioService.delete(id_apolice);
-    }
+    delete(@Param('id_apolice', ParseIntPipe) id_apolice: number) {}
 
 }
