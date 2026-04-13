@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ClienteModule } from './module/Cliente.module';
+import { Cliente } from './entities/Cliente.entity';
 
 @Module({
   imports: [
@@ -10,11 +12,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'root',
       database: 'db_safelife',
-      entities: [],
+      entities: [Cliente],
       synchronize: true,
-    })
+    }),
+    ClienteModule,
   ],
   controllers: [],
   providers: [],
+  
 })
 export class AppModule {}
