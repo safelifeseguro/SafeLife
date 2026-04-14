@@ -13,6 +13,14 @@ export class BeneficiarioController{
         return this.beneficiarioService.findAll();
     }
 
+    @Get('/id/:id_beneficiario')
+    @HttpCode(HttpStatus.OK)
+    findById(
+    @Param('id_beneficiario', ParseIntPipe) id: number
+    ): Promise<Beneficiario> {
+    return this.beneficiarioService.findById(id);
+    }
+
     @Get('/:id_apolice')
     @HttpCode(HttpStatus.OK)
     findById_apolice(@Param('id_apolice', ParseIntPipe) id_apolice: number): Promise<Beneficiario[]>{
