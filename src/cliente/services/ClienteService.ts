@@ -9,7 +9,27 @@ export class ClienteService {
     @InjectRepository(Cliente)
     private repository: Repository<Cliente>,
   ) {}
+
   async create(dados: Cliente): Promise<Cliente> {
+
+    dados.cpf = dados.cpf.replace(/\D/g, '');
+
+    const clienteExistente = await this.repository.findOne({
+    where: { cpf: dados.cpf }
+    });
+    
+    if (clienteExistente) {
+    throw new HttpException('CPF já cadastrado', HttpStatus.BAD_REQUEST);
+    }
+
+    const emailExistente = await this.repository.findOne({
+   where: { email: dados.email }
+   });
+
+    if (emailExistente) {
+  throw new HttpException('Email já cadastrado', HttpStatus.BAD_REQUEST);
+   }
+
     const hoje = new Date();
     const nascimento = new Date(dados.data_nascimento);
     let idade = hoje.getFullYear() - nascimento.getFullYear();

@@ -37,8 +37,11 @@ export class BeneficiarioController{
         return this.beneficiarioService.update(beneficiario);
     }
 
-    @Delete('/:id_apolice')
-    @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id_apolice', ParseIntPipe) id_apolice: number) {}
+    @Delete('/:id_beneficiario')
+    @HttpCode(HttpStatus.OK)
+    async delete(@Param('id_beneficiario', ParseIntPipe) id: number) {
+    await this.beneficiarioService.delete(id);
+    return { message: 'Beneficiário deletado com sucesso' };
+    }
 
 }

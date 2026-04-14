@@ -6,6 +6,7 @@ import { IsNotEmpty } from 'class-validator';
 export class Cliente {
   @PrimaryColumn()
 
+  @PrimaryColumn()
   @IsNotEmpty()
   cpf!: string;
 

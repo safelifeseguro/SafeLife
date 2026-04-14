@@ -8,7 +8,6 @@ export class Apolice {
     @PrimaryGeneratedColumn()
     id_apolice!: number;
 
-    @IsNotEmpty()
     @UpdateDateColumn()
     data_inicio!: Date;
 
