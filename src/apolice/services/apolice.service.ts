@@ -1,0 +1,63 @@
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Apolice } from "../entities/apolice.entity";
+import { Repository } from "typeorm";
+import { DeleteResult } from "typeorm";
+
+@Injectable()
+export class ApoliceService {
+  constructor(
+    @InjectRepository(Apolice)
+    private apoliceRepository: Repository<Apolice>
+  ) {} 
+
+    async findAll(): Promise<Apolice[]> {
+  return await this.apoliceRepository.find({
+    relations: {
+      beneficiario: true
+    }
+  });
+}
+
+    async findById(id_apolice: number): Promise<Apolice> {
+  const apolice = await this.apoliceRepository.findOne({ 
+    where: { id_apolice },
+    relations: {
+      beneficiario: true
+    }
+  });
+
+  if (!apolice) {
+    throw new HttpException('Apolice não encontrada', HttpStatus.NOT_FOUND);
+  }
+
+  return apolice;
+}
+
+    async create(apolice: Apolice): Promise<Apolice> {
+        return await this.apoliceRepository.save(apolice);
+    }
+     async update(apolice: Apolice): Promise<Apolice> {
+        await this.findById(apolice.id_apolice);
+        return await this.apoliceRepository.save(apolice);
+    }
+
+    async delete(id_apolice: number): Promise<string> {
+    await this.findById(id_apolice);
+    await this.apoliceRepository.delete(id_apolice);
+    return "Apolice deletada com sucesso";
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+    
