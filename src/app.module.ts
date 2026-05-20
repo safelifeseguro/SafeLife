@@ -26,7 +26,7 @@ import { AppService } from './app.service';
     BeneficiarioModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
   
 })
 export class AppModule {}
