@@ -14,7 +14,8 @@ export class ApoliceService {
     async findAll(): Promise<Apolice[]> {
   return await this.apoliceRepository.find({
     relations: {
-      beneficiario: true
+      cliente: true,
+      beneficiario: true,
     }
   });
 }
@@ -23,7 +24,8 @@ export class ApoliceService {
   const apolice = await this.apoliceRepository.findOne({ 
     where: { id_apolice },
     relations: {
-      beneficiario: true
+      cliente: true,
+      beneficiario: true,
     }
   });
 
