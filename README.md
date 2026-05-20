@@ -79,7 +79,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/SafeLife.git
+git clone https://github.com/safelifeseguro/SafeLife.git
 cd SafeLife
 ```
 
